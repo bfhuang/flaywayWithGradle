@@ -1,0 +1,1 @@
+alter table PERSON add column age int default null;
