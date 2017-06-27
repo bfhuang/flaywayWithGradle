@@ -1,0 +1,38 @@
+buildscript {
+    dependencies {
+        classpath 'mysql:mysql-connector-java:5.1.25'
+    }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "4.2.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+
+repositories {
+    mavenCentral()
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost:3306/flyway'
+    user = 'root'
+    password = ''
+//    schemas = ['schema1', 'schema2', 'schema3']
+//    placeholders = [
+//            'keyABC'          : 'valueXYZ',
+//            'otherplaceholder': 'value123'
+//    ]
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+
+}
+
+task "create-dir" << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
